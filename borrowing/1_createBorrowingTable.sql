@@ -1,4 +1,4 @@
--- Active: 1757943568716@@127.0.0.1@3306@etchat
+-- Active: 1758102693767@@127.0.0.1@3306@etchat
 CREATE TABLE borrowings (
     borrowing_id CHAR(36) PRIMARY KEY DEFAULT (UUID()),
     user_id CHAR(36),

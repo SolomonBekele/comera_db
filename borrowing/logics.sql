@@ -1,4 +1,4 @@
--- Active: 1757943568716@@127.0.0.1@3306@etchat
+-- Active: 1758102693767@@127.0.0.1@3306@etchat
 
 -- Temporary (until MySQL restarts)
 SET GLOBAL log_bin_trust_function_creators = 1;
@@ -44,3 +44,24 @@ BEGIN
     END IF;
 END$$
 DELIMITER ;
+
+
+
+-- 2a) Check if a book is currently available:
+SELECT CASE
+         WHEN EXISTS (
+             SELECT 1 FROM borrowings
+             WHERE book_id = 'BOOK_ID_HERE' AND return_date IS NULL
+         ) THEN 'NOT_AVAILABLE'
+         ELSE 'AVAILABLE'
+       END AS availability;
+
+-- 2b) Insert a borrowing (do this in a transaction in application code):
+START TRANSACTION;
+-- Optional: double-check (to avoid race conditions at app level, trigger also protects)
+SELECT 1 FROM borrowings WHERE book_id = 'BOOK_ID_HERE' AND return_date IS NULL FOR UPDATE;
+
+INSERT INTO borrowings (user_id, book_id)
+VALUES ('USER_ID_HERE', 'BOOK_ID_HERE');
+
+COMMIT;
