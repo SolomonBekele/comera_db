@@ -1,11 +1,8 @@
 -- Active: 1758102693767@@127.0.0.1@3306@etchat
+SELECT * FROM borrowings;
 
--- Temporary (until MySQL restarts)
-SET GLOBAL log_bin_trust_function_creators = 1;
-
--- Permanent (edit my.cnf or my.ini)
-[mysqld]
-log_bin_trust_function_creators = 1
+DELETE FROM books as b
+where  b.id = '770e8400-e29b-41d4-a716-446655440001'
 
 -- Trigger that prevents creating a new active borrowing for a book that is already borrowed (i.e., has a row with return_date IS NULL)
 DELIMITER $$
