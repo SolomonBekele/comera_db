@@ -9,3 +9,13 @@ INSERT INTO borrowings (borrowing_id, user_id, book_id, borrow_date, return_date
 ('880e8400-e29b-41d4-a716-446655440003', '550e8400-e29b-41d4-a716-446655440003', '770e8400-e29b-41d4-a716-446655440003', NOW(), NULL), -- Hannah borrows Database System Concepts
 ('880e8400-e29b-41d4-a716-446655440004', '550e8400-e29b-41d4-a716-446655440004', '770e8400-e29b-41d4-a716-446655440004', NOW(), NULL), -- Ivan borrows Computer Networks
 ('880e8400-e29b-41d4-a716-446655440005', '550e8400-e29b-41d4-a716-446655440005', '770e8400-e29b-41d4-a716-446655440005', NOW(), NULL); -- Julia borrows PRML
+
+
+INSERT INTO borrowings (borrowing_id, user_id, book_id, borrow_date, return_date) VALUES
+('880e8400-e29b-41d4-a716-446655440032', '550e8400-e29b-41d4-a716-446655440001', '770e8400-e29b-41d4-a716-446655440001', NOW(), NULL);
+
+select * FROM borrowings where book_id = '770e8400-e29b-41d4-a716-446655440001';
+
+update borrowings 
+set return_date = NOW() 
+where book_id = '770e8400-e29b-41d4-a716-446655440001' and return_date IS NULL
