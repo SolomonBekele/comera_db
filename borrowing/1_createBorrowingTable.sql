@@ -8,3 +8,6 @@ CREATE TABLE borrowings (
     FOREIGN KEY (user_id) REFERENCES users(id),
     FOREIGN KEY (book_id) REFERENCES books(id)
 );
+
+
+SELECT * FROM borrowings

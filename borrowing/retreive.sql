@@ -25,3 +25,25 @@ select CONCAT(u.first_name,' ',u.last_name) as user_name, br.borrow_date
 from users as u
 join borrowings as br on br.user_id = u.id
 where br.book_id = '770e8400-e29b-41d4-a716-446655440001' and return_date IS not NULL
+
+
+
+
+SELECT title,publication_date,COUNT(title) as total_books
+from books
+GROUP BY publication_date,title
+
+
+SELECT publication_date, COUNT(publication_date) AS total_books,u.first_name
+FROM books b
+JOIN borrowings br on br.book_id = b.id
+JOIN users u on br.user_id = u.id
+where YEAR(b.publication_date) < 2016
+GROUP BY b.publication_date,u.first_name
+HAVING COUNT(publication_date) >= 1;
+
+
+SELECT u.first_name, COUNT(br.user_id) AS total_borrowings
+FROM users u
+JOIN borrowings br ON u.id = br.user_id
+GROUP BY u.first_name;
